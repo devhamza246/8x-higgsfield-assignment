@@ -2,8 +2,11 @@
 
 A product engineering assessment for 8x by Hamza Hameed.
 
-[Deployed owner-private preview](https://vela-creative-studio-hamza.candyrat6.chatgpt.site).
-This is not yet an anonymous assessment link; public access must be enabled before submission.
+[Open the public studio](https://vela-creative-studio-hamza.candyrat6.chatgpt.site) ·
+[Implementation branch](https://github.com/devhamza246/8x-higgsfield-assignment/tree/codex/creative-studio)
+
+Public page, JavaScript and sample video verified without cookies or authentication.
+See [submission links and checklist](docs/submission.md).
 
 A focused creative workspace for exploring product films, with a clear answer to
 three questions: what will this attempt cost, what is my project limit, and what

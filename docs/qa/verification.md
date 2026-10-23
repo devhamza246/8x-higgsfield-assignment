@@ -53,3 +53,17 @@ Owner-private URL: https://vela-creative-studio-hamza.candyrat6.chatgpt.site
 Source commit at the Sites repository: `def1a1601975f9b5f84d3266d60d46dc1d5a0bb5`.
 The deployment contains only curated studio files; research and capture logs stay
 in the assessment repository. Anonymous/public access is not yet enabled.
+
+## Public access verification — 24 October, 00:47 PKT
+
+The owner approved continuing from the private-preview handoff. The Sites audience
+was updated to `public` (access-policy revision 2). Independent HTTP requests with
+no cookies or Authorization header returned HTTP 200 for the page, `/app.mjs`,
+`/repository.mjs`, and `/assets/forest-wide-8.mp4`. The page contained the expected
+studio heading and did not redirect to a sign-in page. This verifies anonymous
+HTTP access; it is distinct from the earlier owner-authenticated browser QA.
+
+The GitHub public API reports `private: false` and `visibility: public`. Remote
+`codex/creative-studio` was already synchronized at `fc73ddb` before the current
+documentation update. The remote `main` remains the initial commit, so the submission
+notes use the implementation branch URL explicitly. No shared-branch merge was made.
