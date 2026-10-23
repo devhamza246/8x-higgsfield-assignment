@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111310" />
+    <meta
+      name="description"
+      content="A considered creative studio concept. Explore cinematic product films with clear budgets, saved versions and transparent recovery."
+    />
+    <title>Higgsfield — Studio, reimagined</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg
+      class="icon-definitions"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1.5" />
+          <rect x="14" y="3" width="7" height="7" rx="1.5" />
+          <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        </symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M5 12h14m-5-5 5 5-5 5" />
+        </symbol>
+        <symbol id="i-film" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 4v16M17 4v16M3 9h4m10 0h4M3 15h4m10 0h4" />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24">
+          <path
+            d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7ZM20 2v4m-2-2h4"
+          />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="m12 3 8 3v5c0 5-4 8-8 10-4-2-8-5-8-10V6Z" />
+          <path d="m8 12 3 3 5-6" />
+        </symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24">
+          <path d="m8 10 4 4 4-4" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4" />
+        </symbol>
+        <symbol id="i-play" viewBox="0 0 24 24">
+          <path d="m9 5 11 7-11 7Z" />
+        </symbol>
+        <symbol id="i-image" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="3" />
+          <circle cx="8" cy="8" r="1.5" />
+          <path d="m3 17 6-6 4 4 3-3 5 5" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4L19 6" />
+        </symbol>
+        <symbol id="i-compare" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="M12 2v20" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M18 6 6 18" />
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24">
+          <path
+            d="M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 13 3M5 15a8 8 0 0 0 13 3"
+          />
+        </symbol>
+        <symbol id="i-leaf" viewBox="0 0 24 24">
+          <path d="M20 3C9 2 2 7 5 16c9 4 16-3 15-13ZM5 20 16 9" />
+        </symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24">
+          <path d="m13 2-9 12h7l-1 8 10-13h-7Z" />
+        </symbol>
+        <symbol id="i-info" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 11v6m0-10v1" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a href="#workspace" class="brand" aria-label="Higgsfield Studio home"
+          ><span class="brand-mark">h<span>f</span></span
+          >higgsfield<span class="brand-period">.</span></a
+        >
+        <div class="workspace-label">
+          <span class="workspace-avatar">H</span>
+          <div>Hamza’s workspace<small>Personal studio</small></div>
+          <svg class="icon"><use href="#i-chevron" /></svg>
+        </div>
+        <nav class="side-nav" aria-label="Main navigation">
+          <button data-view="workspace" class="nav-item active">
+            <svg class="icon"><use href="#i-spark" /></svg>Create<span
+              class="keycap"
+              >N</span
+            >
+          </button>
+          <button data-view="projects" class="nav-item">
+            <svg class="icon"><use href="#i-grid" /></svg>Projects<span
+              id="project-count"
+              class="nav-count"
+              >1</span
+            >
+          </button>
+          <button data-view="activity" class="nav-item">
+            <svg class="icon"><use href="#i-clock" /></svg>Activity
+          </button>
+        </nav>
+        <div class="section-line">
+          <span>YOUR PROJECTS</span
+          ><button
+            class="icon-button"
+            data-action="new-project"
+            aria-label="Create project"
+          >
+            <svg class="icon"><use href="#i-plus" /></svg>
+          </button>
+        </div>
+        <div id="project-list" class="project-list"></div>
+        <button class="new-project-link" data-action="new-project">
+          <svg class="icon"><use href="#i-plus" /></svg>New project
+        </button>
+        <div class="sidebar-bottom">
+          <div class="balance-card">
+            <div class="balance-heading">
+              <svg class="icon"><use href="#i-spark" /></svg>Demo balance<button
+                class="icon-button"
+                data-action="demo-info"
+                aria-label="About demo credits"
+              >
+                <svg class="icon"><use href="#i-info" /></svg>
+              </button>
+            </div>
+            <strong
+              ><span id="balance">120</span><small> credits</small></strong
+            >
+            <div class="balance-meter"><span id="balance-meter"></span></div>
+            <p>Room to explore. Yours to control.</p>
+            <button class="text-button" data-view="activity">
+              View credit activity <span>↗</span>
+            </button>
+          </div>
+          <button class="profile-button" data-action="demo-info">
+            <span class="avatar">HH</span
+            ><span
+              >Hamza Hameed<small
+                >8x product engineering assessment</small
+              ></span
+            >
+          </button>
+        </div>
+      </aside>
+      <div class="app-content">
+        <header class="topbar">
+          <div class="breadcrumb">
+            <svg class="icon"><use href="#i-film" /></svg><span>Studio</span
+            ><span class="slash">/</span
+            ><strong id="breadcrumb-project">Vela · Botanical</strong>
+          </div>
+          <div class="topbar-actions">
+            <button class="demo-pill" data-action="demo-info">
+              <span></span>Demo mode<svg class="icon">
+                <use href="#i-info" />
+              </svg></button
+            ><a
+              class="assessment-link"
+              href="https://github.com/devhamza246/8x-higgsfield-assignment"
+              target="_blank"
+              rel="noreferrer"
+              >Built with intention ↗</a
+            >
+          </div>
+        </header>
+        <main id="main-content">
+          <section id="workspace-view" class="workspace-view">
+            <div class="workspace-heading">
+              <div>
+                <div class="eyebrow">
+                  A LITTLE IMAGINATION. A LOT OF POSSIBILITY.
+                </div>
+                <h1>Your next great shot.</h1>
+                <p>Create with a clear vision. And a clear budget.</p>
+              </div>
+              <button class="subtle-button" id="rename-project">
+                Project settings
+                <svg class="icon"><use href="#i-chevron" /></svg>
+              </button>
+            </div>
+            <div class="editor-grid">
+              <div class="creative-column">
+                <div class="preview-toolbar">
+                  <div class="preview-title">
+                    <span class="status-dot"></span
+                    ><span id="preview-title">Vela · Botanical campaign</span>
+                  </div>
+                  <span class="preview-meta" id="preview-meta"
+                    >STARTER PREVIEW</span
+                  >
+                </div>
+                <div class="preview-frame" id="preview-frame">
+                  <img
+                    id="preview-image"
+                    src="assets/vela-forest.png"
+                    alt="Vela botanical fragrance bottle on a moss-covered rock in a sunlit forest"
+                  /><video
+                    id="preview-video"
+                    playsinline
+                    loop
+                    controls
+                    preload="none"
+                    hidden
+                  ></video>
+                  <div class="preview-shade"></div>
+                  <div class="preview-label">
+                    <span class="tiny-pill">CREATIVE EXPLORATION</span>
+                  </div>
+                  <button
+                    id="play-preview"
+                    class="play-button"
+                    aria-label="Play sample film"
+                  >
+                    <svg class="icon"><use href="#i-play" /></svg>
+                  </button>
+                  <div class="preview-copy">
+                    <span>VELA / BOTANICAL</span>
+                    <h2>Find your<br /><em>wild.</em></h2>
+                  </div>
+                  <div class="preview-bottom">
+                    <span><i></i>Sample film · No live AI generation</span
+                    ><span id="frame-format">8 SEC&nbsp; / &nbsp;16:9</span>
+                  </div>
+                  <div id="job-overlay" class="job-overlay" hidden></div>
+                </div>
+                <div class="result-toolbar">
+                  <div class="result-status" id="result-status">
+                    <svg class="icon"><use href="#i-leaf" /></svg>A starting
+                    point for something great.
+                  </div>
+                  <div class="result-actions">
+                    <button
+                      id="compare-button"
+                      class="icon-button"
+                      aria-label="Compare versions"
+                      title="Compare versions"
+                    >
+                      <svg class="icon"><use href="#i-compare" /></svg></button
+                    ><button
+                      id="download-button"
+                      class="icon-button"
+                      aria-label="Download sample video"
+                      title="Download sample video"
+                    >
+                      <svg class="icon"><use href="#i-download" /></svg></button
+                    ><button id="result-menu" class="subtle-button" hidden>
+                      Review result
+                      <svg class="icon"><use href="#i-chevron" /></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="versions-heading">
+                  <span>YOUR EXPLORATIONS</span
+                  ><span id="version-count"
+                    >One idea. Endless possibilities.</span
+                  >
+                </div>
+                <div id="versions" class="versions"></div>
+                <section class="composer" aria-labelledby="brief-title">
+                  <div class="composer-header">
+                    <label id="brief-title" for="prompt"
+                      ><svg class="icon"><use href="#i-spark" /></svg>The
+                      creative brief</label
+                    ><button class="text-button" id="use-example">
+                      Try an example ↗
+                    </button>
+                  </div>
+                  <textarea
+                    id="prompt"
+                    maxlength="2000"
+                    rows="3"
+                    placeholder="Describe the shot you have in mind…"
+                  >
+A slow cinematic push-in on a botanical perfume bottle. Morning light filters through the forest, catching the glass. Earthy, atmospheric, quietly luxurious.</textarea
+                  >
+                  <div class="composer-bottom">
+                    <button
+                      type="button"
+                      class="reference-button"
+                      id="add-reference"
+                    >
+                      <svg class="icon"><use href="#i-plus" /></svg
+                      ><span id="reference-label">Add reference</span></button
+                    ><input
+                      id="reference-input"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      hidden
+                    /><button
+                      id="clear-reference"
+                      class="icon-button"
+                      aria-label="Remove reference"
+                      hidden
+                    >
+                      <svg class="icon"><use href="#i-close" /></svg></button
+                    ><span class="composer-note"
+                      >Your reference stays on this device.</span
+                    ><span id="prompt-length">166 / 2,000</span>
+                  </div>
+                  <div
+                    id="reference-preview"
+                    class="reference-preview"
+                    hidden
+                  ></div>
+                </section>
+                <div class="disclosure-note">
+                  <svg class="icon"><use href="#i-info" /></svg>
+                  <p>
+                    This is a working studio concept. Generation uses bundled
+                    sample films; your brief and references won’t alter their
+                    content. Settings, budgets and project history work locally.
+                  </p>
+                </div>
+              </div>
+              <aside class="inspector" aria-label="Generation settings">
+                <section class="settings-section">
+                  <div class="section-title">
+                    <h2>Make it your own</h2>
+                    <span>01</span>
+                  </div>
+                  <label class="field-label">Visual direction</label>
+                  <div class="preset-grid" id="presets">
+                    <button
+                      class="preset selected"
+                      data-preset="forest"
+                      aria-pressed="true"
+                    >
+                      <span class="preset-image forest"></span
+                      ><span>Botanical</span><i>✓</i></button
+                    ><button
+                      class="preset"
+                      data-preset="golden"
+                      aria-pressed="false"
+                    >
+                      <span class="preset-image golden"></span
+                      ><span>Golden hour</span><i>✓</i></button
+                    ><button
+                      class="preset"
+                      data-preset="noir"
+                      aria-pressed="false"
+                    >
+                      <span class="preset-image noir"></span
+                      ><span>After dark</span><i>✓</i>
+                    </button>
+                  </div>
+                  <label class="field-label">What matters most?</label>
+                  <div class="priority-options" id="priorities">
+                    <button data-priority="fast">
+                      <svg class="icon"><use href="#i-bolt" /></svg
+                      ><span>Fast<small>Explore an idea</small></span
+                      ><span class="radio"></span></button
+                    ><button data-priority="balanced" class="selected">
+                      <svg class="icon"><use href="#i-leaf" /></svg
+                      ><span>Balanced<small>The sweet spot</small></span
+                      ><span class="radio"></span></button
+                    ><button data-priority="quality">
+                      <svg class="icon"><use href="#i-spark" /></svg
+                      ><span>Quality<small>Make every detail count</small></span
+                      ><span class="radio"></span>
+                    </button>
+                  </div>
+                  <div class="two-fields">
+                    <div>
+                      <label class="field-label" for="duration">Duration</label>
+                      <div class="select-wrap">
+                        <select id="duration">
+                          <option value="5">5 seconds</option>
+                          <option value="8" selected>8 seconds</option>
+                          <option value="10">10 seconds</option></select
+                        ><svg class="icon"><use href="#i-chevron" /></svg>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="field-label" for="aspect-ratio"
+                        >Aspect ratio</label
+                      >
+                      <div class="select-wrap">
+                        <select id="aspect-ratio">
+                          <option value="16:9">16:9 · Wide</option>
+                          <option value="9:16">9:16 · Social</option>
+                          <option value="1:1">1:1 · Square</option></select
+                        ><svg class="icon"><use href="#i-chevron" /></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="recommended-model">
+                    <svg class="icon"><use href="#i-check" /></svg
+                    ><span id="recommended-model">Studio · Balanced</span
+                    ><span>Recommended</span>
+                  </div>
+                </section>
+                <section class="budget-panel">
+                  <div class="budget-panel-heading">
+                    <span
+                      ><svg class="icon"><use href="#i-shield" /></svg>Create
+                      with confidence</span
+                    ><button id="edit-budget" class="text-button">
+                      Edit limit
+                    </button>
+                  </div>
+                  <div class="quote-row">
+                    <span>This generation</span
+                    ><strong
+                      ><span id="quote-cost">13</span>
+                      <small>credits</small></strong
+                    >
+                  </div>
+                  <div class="quote-row muted">
+                    <span>Illustrative wait</span
+                    ><span id="quote-eta">40–60 sec</span>
+                  </div>
+                  <div class="budget-divider"></div>
+                  <div class="budget-summary">
+                    <span>Project budget</span
+                    ><span
+                      ><strong id="budget-used">0</strong> /
+                      <span id="budget-total">80</span></span
+                    >
+                  </div>
+                  <div class="project-meter">
+                    <span id="project-meter"></span><i id="forecast-meter"></i>
+                  </div>
+                  <p id="budget-after">67 credits left after this generation</p>
+                  <div class="protected-label">
+                    <svg class="icon"><use href="#i-shield" /></svg>Hard limit.
+                    No surprises.
+                  </div>
+                </section>
+                <div
+                  id="generation-error"
+                  class="inline-error"
+                  role="alert"
+                  hidden
+                ></div>
+                <button id="generate-button" class="generate-button">
+                  <svg class="icon"><use href="#i-spark" /></svg
+                  ><span>Create sample film</span
+                  ><svg class="icon"><use href="#i-arrow" /></svg>
+                </button>
+                <p class="generate-caption">
+                  Demo credits only. No real charges.
+                </p>
+                <details class="demo-controls">
+                  <summary>Explore failure recovery</summary>
+                  <label
+                    ><input id="failure-toggle" type="checkbox" />Make the next
+                    sample fail</label
+                  >
+                  <p>
+                    See how credits return when a generation doesn’t complete.
+                    Demo jobs take about 14 seconds.
+                  </p>
+                </details>
+                <div class="inspector-footer">
+                  <span class="small-orbit">✳</span>
+                  <p>Less guesswork.<br />More room to create.</p>
+                </div>
+              </aside>
+            </div>
+          </section>
+          <section id="projects-view" class="alternate-view" hidden>
+            <div class="view-heading">
+              <div>
+                <div class="eyebrow">KEEP YOUR IDEAS TOGETHER</div>
+                <h1>Your projects.</h1>
+                <p>A home for every direction you want to explore.</p>
+              </div>
+              <button class="primary-button" data-action="new-project">
+                + New project
+              </button>
+            </div>
+            <div id="project-cards" class="project-cards"></div>
+          </section>
+          <section id="activity-view" class="alternate-view" hidden>
+            <div class="view-heading">
+              <div>
+                <div class="eyebrow">EVERY CREDIT. ACCOUNTED FOR.</div>
+                <h1>A clearer picture.</h1>
+                <p>Reservations and returns, with nothing hidden in between.</p>
+              </div>
+            </div>
+            <div id="activity-summary" class="activity-summary"></div>
+            <div class="activity-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Activity</th>
+                    <th>Project</th>
+                    <th>When</th>
+                    <th>Demo credits</th>
+                  </tr>
+                </thead>
+                <tbody id="activity-rows"></tbody>
+              </table>
+              <div id="activity-empty" class="empty-state">
+                <svg class="icon"><use href="#i-leaf" /></svg>
+                <h2>A clean slate.</h2>
+                <p>
+                  Create your first sample film. Every credit will have a story
+                  here.
+                </p>
+                <button class="subtle-button" data-view="workspace">
+                  Start exploring →
+                </button>
+              </div>
+            </div>
+            <p class="storage-note">
+              Demo records are saved in this browser. No account, payment or
+              cloud sync.
+            </p>
+          </section>
+        </main>
+        <footer class="page-footer">
+          <span>HIGGSFIELD, REIMAGINED.</span
+          ><span>A product concept by Hamza Hameed <i>·</i> Built for 8x</span>
+        </footer>
+      </div>
+    </div>
+    <dialog id="modal">
+      <div class="modal-header">
+        <span id="modal-eyebrow" class="eyebrow">YOUR STUDIO</span
+        ><button id="close-modal" class="icon-button" aria-label="Close dialog">
+          <svg class="icon"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <h2 id="modal-title"></h2>
+      <div id="modal-body"></div>
+    </dialog>
+    <div id="toast" class="toast" role="status" hidden></div>
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>
