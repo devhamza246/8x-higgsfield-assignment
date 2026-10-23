@@ -65,11 +65,42 @@ HTTP access; it is distinct from the earlier owner-authenticated browser QA.
 
 The GitHub public API reports `private: false` and `visibility: public`. Remote
 `codex/creative-studio` was already synchronized at `fc73ddb` before the current
-documentation update. The remote `main` remains the initial commit, so the submission
-notes use the implementation branch URL explicitly. No shared-branch merge was made.
+documentation update. At that check the remote `main` was still the initial commit, so the submission
+notes then used the implementation branch URL. This historical state was superseded
+by PR #1 merging into main, confirmed during the 24 October review follow-up.
 
 The follow-up documentation commit was created locally, but `git push` failed with
 “could not read Username for https://github.com” in the noninteractive shell.
 Public API checks independently confirmed the implementation and earlier capture
 logs are accessible on `codex/creative-studio`. Latest handoff notes need an
 authenticated push; do not confuse that with a missing product deployment.
+
+## Review follow-up — 24 October 2026 (Asia/Karachi)
+
+- Reproduced an exhausted Vela project and verified that its message instructs a
+  limit increase without suggesting Fast when Fast is already selected.
+- Switched to Autumn launch and verified the old warning disappeared.
+- Saved distinct Campaign A and Campaign B briefs, priorities and formats; switches
+  restored the right values. A selected completed result survived page reload.
+- With 5 credits of project allowance left, Quality correctly suggested Fast;
+  switching to the affordable Fast option cleared the warning immediately.
+- Added regression coverage for per-project state, legacy-owner migration, malformed
+  context recovery, foreign result selection, useful budget guidance and obsolete
+  async validation. All 13 application tests and the capture-export test pass.
+- Independent read-only review identified the async stale-error race; a composer
+  revision guard now suppresses errors after intervening context changes.
+- Essential credit/settings explanations use at least 12px; the main demo disclosure
+  uses 12px. Checked the 390px breakpoint without document overflow.
+- Evidence: `project-context-review-desktop.jpg`, `project-context-review-mobile.jpg`.
+- Verified all existing LOG_ENTRY bodies remain byte-identical prefixes. Only new
+  exchanges/frontmatter updates from automatic capture are added.
+
+Current repository status: PR #1 merged at `670fcbd`; pre-review local and remote
+main matched `ec34389`. Earlier notes about missing implementation/pending handoff
+push are historical, not a current blocker. This review is on
+`codex/project-context-fixes`; its final publication and Git push are reported
+separately rather than presumed successful.
+
+Review update publication succeeded as Sites version 2, deployment
+`appgdep_6adbdbeeaa4c819180828ead0a85cefe`, at the existing public URL.
+Published Site-source commit: `cd2a183bc82fdd43e56fbf1954aae7d052f9f40e`.

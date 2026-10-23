@@ -82,10 +82,20 @@ export function startJob(state, input, now = Date.now()) {
   const q = quote(input.settings);
   if (q.cost > available(state))
     throw new Error("Not enough demo credits in your balance.");
-  if (q.cost + used(state, project.id) > project.budget)
+  if (q.cost + used(state, project.id) > project.budget) {
+    const remaining = project.budget - used(state, project.id);
+    const fastCost = quote({ ...input.settings, priority: "fast" }).cost;
+    const canTryFast =
+      input.settings.priority !== "fast" &&
+      fastCost <= remaining &&
+      fastCost <= available(state);
     throw new Error(
-      "This generation exceeds your project budget. Increase the limit or try Fast.",
+      "This generation exceeds your project budget. " +
+        (canTryFast
+          ? "Increase the limit or try Fast."
+          : "Increase this project's limit to continue."),
     );
+  }
   const next = structuredClone(state),
     id = crypto.randomUUID();
   next.jobs.push({
@@ -149,8 +159,13 @@ export function cancelJob(state, id, now = Date.now()) {
 
 export function forecastBudget(state, projectId, settings) {
   const project = state.projects.find((p) => p.id === projectId);
-  if (!project) throw new Error('Project not found.');
-  const active = state.jobs.find((j) => j.projectId === projectId && ACTIVE.includes(j.status));
+  if (!project) throw new Error("Project not found.");
+  const active = state.jobs.find(
+    (j) => j.projectId === projectId && ACTIVE.includes(j.status),
+  );
   const additionalCost = active ? 0 : quote(settings).cost;
-  return { additionalCost, remaining: project.budget - used(state, projectId) - additionalCost };
+  return {
+    additionalCost,
+    remaining: project.budget - used(state, projectId) - additionalCost,
+  };
 }

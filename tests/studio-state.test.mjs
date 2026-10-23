@@ -86,11 +86,37 @@ test("limits and pricing are predictable across configurations", () => {
 });
 
 test("budget forecast does not count an active reservation twice", () => {
- const initial=createState();
- assert.equal(forecastBudget(initial,'vela',input.settings).remaining,72);
- const active=startJob(initial,input,1000);
- assert.equal(forecastBudget(active,'vela',input.settings).remaining,72);
- assert.equal(forecastBudget(active,'vela',input.settings).additionalCost,0);
- const done=advanceJobs(active,20000);
- assert.equal(forecastBudget(done,'vela',input.settings).remaining,64);
+  const initial = createState();
+  assert.equal(forecastBudget(initial, "vela", input.settings).remaining, 72);
+  const active = startJob(initial, input, 1000);
+  assert.equal(forecastBudget(active, "vela", input.settings).remaining, 72);
+  assert.equal(
+    forecastBudget(active, "vela", input.settings).additionalCost,
+    0,
+  );
+  const done = advanceJobs(active, 20000);
+  assert.equal(forecastBudget(done, "vela", input.settings).remaining, 64);
+});
+
+test("budget guidance only suggests Fast when it can actually fit", () => {
+  const fast = { ...input, settings: { ...input.settings, priority: "fast" } };
+  for (const request of [input, fast]) {
+    const state = setBudget(createState(), "vela", 0);
+    assert.throws(
+      () => startJob(state, request, 1),
+      (e) => /budget/i.test(e.message) && !/try Fast/i.test(e.message),
+    );
+  }
+  assert.throws(
+    () => startJob(setBudget(createState(), "vela", 4), fast, 1),
+    (e) => !/try Fast/i.test(e.message),
+  );
+  assert.throws(
+    () => startJob(setBudget(createState(), "vela", 5), input, 1),
+    /try Fast/i,
+  );
+  assert.throws(
+    () => startJob(setBudget(createState(), "vela", 4), input, 1),
+    (e) => !/try Fast/i.test(e.message),
+  );
 });

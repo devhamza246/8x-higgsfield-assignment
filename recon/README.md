@@ -71,3 +71,31 @@ account/credits and cross-workflow asset transfer have not been tested. There is
 no API access or approved generation budget. Complete an authenticated walkthrough
 with the candidate's help if available; otherwise disclose the research boundary
 and keep implementation claims accurate.
+
+## Firsthand review follow-up — 24 October 2026 (Asia/Karachi)
+
+This section concerns **our assessment studio**, not new findings about Higgsfield.
+The candidate reviewed the public demo and reported stale budget warnings after
+project switches, shared brief/settings context, generic positioning and faint
+explanatory text. These are qualitative observations from one review, not a user
+study or population-level evidence.
+
+Code inspection confirmed one global draft key and a project switch that reset
+result selection without restoring its working context. The budget message offered
+“try Fast” regardless of the selected priority or remaining allowance. A follow-up
+local browser test on 24 October confirmed that an exhausted project produces a
+limit-increase instruction without “try Fast”; switching to an affordable project
+clears the warning. Separate botanical and social campaign briefs and settings
+were restored correctly, and a selected completed result survived a refresh.
+
+The product message now explains campaign organization and per-project spending
+limits directly. The priority descriptions, budget explanations and demo disclosure
+use larger, higher-contrast text. These changes strengthen a narrower thesis:
+**keep campaign decisions and explorations together, while controlling each
+project's spend**. The shared credit balance remains deliberate.
+
+The historical “directions not yet selected” and “no stack selected” statements
+above describe the 23 October reconnaissance stage. The selected implementation
+is now the project-oriented static browser studio; it uses labelled sample films,
+local persistence, and no live inference provider. The user removed the separate
+research file in commit `ec34389`; this update does not restore or rewrite it.

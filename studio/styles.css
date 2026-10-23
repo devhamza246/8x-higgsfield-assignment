@@ -2145,3 +2145,189 @@ dialog form > .primary-button {
     margin-top: 16px;
   }
 }
+
+/* Product-review pass: readable explanations at normal desktop/mobile zoom. */
+:root {
+  --muted: #b0baa4;
+}
+.workspace-heading {
+  align-items: flex-start;
+}
+.workspace-heading h1 {
+  font-size: clamp(25px, 2.3vw, 36px);
+}
+.workspace-heading h1 + p {
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 660px;
+  color: #b4bea9;
+}
+.eyebrow,
+.versions-heading {
+  font-size: 10px;
+  color: #a7b593;
+}
+.section-title > h2 {
+  font-size: 15px;
+}
+.field-label,
+.quote-row,
+.budget-summary {
+  font-size: 12px;
+  color: #c5d0b9;
+}
+.priority-options > button > span:first-of-type {
+  font-size: 13px;
+}
+.priority-options small {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #b2c19f;
+}
+.preset {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.select-wrap select {
+  font-size: 12px;
+  padding-right: 21px;
+}
+.recommended-model,
+.recommended-model > span:last-child {
+  font-size: 10px;
+  color: #a5b990;
+}
+.budget-panel-heading > span {
+  font-size: 11px;
+}
+.budget-panel-heading > .text-button {
+  font-size: 11px;
+}
+.quote-row.muted,
+.budget-panel > p,
+.protected-label {
+  font-size: 11px;
+  line-height: 1.65;
+  color: #b4c8a0;
+}
+.generate-caption,
+.demo-controls,
+.demo-controls p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #acba9c;
+}
+.demo-controls label {
+  font-size: 12px;
+}
+.composer-header label {
+  font-size: 13px;
+}
+.composer-header > .text-button,
+.reference-button {
+  font-size: 11px;
+}
+.composer-note,
+.composer-bottom > span:last-child {
+  font-size: 10px;
+  color: #a4b293;
+}
+.disclosure-note p {
+  font-size: 12px;
+  line-height: 1.75;
+  color: #b0bda1;
+}
+.disclosure-note > .icon {
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+}
+.balance-card p,
+.balance-heading,
+.balance-card .text-button {
+  font-size: 11px;
+  color: #b8c8a5;
+}
+.result-status,
+.preview-title {
+  font-size: 12px;
+}
+.reference-preview {
+  font-size: 11px;
+  line-height: 1.6;
+}
+.version-card > span {
+  font-size: 10px;
+}
+.version-card > span small,
+.version-card .version-state {
+  font-size: 9px;
+}
+.storage-note {
+  font-size: 12px;
+  color: #b0baa4;
+}
+.preview-bottom {
+  font-size: 10px;
+}
+@media (max-width: 740px) {
+  .workspace-heading h1 {
+    line-height: 1.25;
+  }
+  .workspace-heading h1 + p {
+    font-size: 12px;
+  }
+  .preset {
+    font-size: 10px;
+  }
+  .inspector {
+    grid-template-columns: 1fr;
+  }
+  .settings-section {
+    grid-row: auto;
+  }
+  .two-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+  .budget-panel {
+    margin-top: 8px;
+  }
+  .inline-error {
+    grid-column: auto;
+  }
+  .composer-note {
+    display: none;
+  }
+  .preview-bottom {
+    font-size: 8px;
+  }
+}
+@media (max-width: 460px) {
+  .workspace-heading .eyebrow {
+    font-size: 9px;
+  }
+  .workspace-heading h1 + p {
+    font-size: 12px;
+  }
+  .priority-options small {
+    font-size: 10px;
+  }
+  .priority-options > button > span:first-of-type {
+    font-size: 12px;
+  }
+  .recommended-model > span:last-child {
+    display: none;
+  }
+  .preview-bottom {
+    font-size: 7px;
+  }
+  .composer textarea {
+    font-size: 13px;
+  }
+}
+/* Essential explanations remain readable even at the narrowest breakpoint. */
+.priority-options small, .quote-row.muted, .budget-panel > p,
+.protected-label, .generate-caption, .demo-controls, .demo-controls p,
+.balance-card p, .budget-panel-heading > span, .budget-panel-heading > .text-button {
+  font-size: 12px;
+}

@@ -9,11 +9,11 @@ Deadline displayed in the candidate portal: **24 October 2026, 17:35 Asia/Karach
 https://vela-creative-studio-hamza.candyrat6.chatgpt.site
 
 **Public GitHub implementation and capture logs**
-https://github.com/devhamza246/8x-higgsfield-assignment/tree/codex/creative-studio
+https://github.com/devhamza246/8x-higgsfield-assignment
 
-Use that branch-specific URL: the default branch currently points to the initial
-commit. The application, tests, research and `.agent-logs/` are on the implementation
-branch. No merge into main is implied by publishing the demo.
+The implementation, tests and original capture logs are on `main`: PR #1 was
+merged at `670fcbd`, and local/remote main matched `ec34389` before this review
+follow-up. Use the normal repository URL above.
 
 **Walkthrough video**
 Record and add your public HTTPS link. Camera on, voiceover, under five minutes.
@@ -48,10 +48,10 @@ Review the note in your own voice before submitting.
 - [x] Public deployment and sample media accessible without authentication.
 - [x] GitHub repository confirmed public.
 - [x] Product implementation and earlier automatic capture logs are on GitHub.
-- [ ] Push the latest local submission-notes/capture-log follow-up: this shell has no GitHub credentials.
+- [x] Previous submission-notes/capture-log follow-up merged into main.
 - [x] Application tests, capture tests, desktop and mobile QA documented.
 - [x] Demo limitations disclosed in the app, README and walkthrough outline.
-- [ ] You have personally tried the public link and the main demo flow.
+- [x] You reviewed the public studio and supplied follow-up feedback.
 - [ ] Walkthrough recorded with camera and voiceover, under five minutes.
 - [ ] Separate one-minute introduction recorded.
 - [ ] Video URLs accessible to an evaluator without requesting permission.
@@ -61,9 +61,10 @@ Review the note in your own voice before submitting.
 No application form has been submitted by the agent. Recording your camera,
 claiming personal experience and sending the assessment remain your steps.
 
-## Pending local push
+## Repository status
 
-The implementation was already present on the public branch at `fc73ddb`. The
-follow-up push of these handoff notes failed because Git could not obtain a GitHub
-username in this noninteractive shell. Push `codex/creative-studio` from your
-authenticated Git client. No main-branch changes or credential changes were made.
+The previous push warning is resolved by the subsequent merge into main. It is
+retained only as a dated historical observation in verification records and the
+original agent logs. The current fixes are on `codex/project-context-fixes`; their
+commit/push result is recorded in the current handoff rather than inferred from
+that earlier failure.

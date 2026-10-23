@@ -11,10 +11,15 @@ import {
   setBudget,
 } from "./state.mjs";
 import { createRepository } from "./repository.mjs";
+import {
+  activeProjectId,
+  readProjectContext,
+  saveProjectContext,
+  createValidationScope,
+} from "./context.mjs";
 const $ = (s) => document.querySelector(s),
   $$ = (s) => [...document.querySelectorAll(s)];
-const KEY = "higgsfield-studio-v1",
-  DRAFT = "higgsfield-studio-draft-v1";
+const KEY = "higgsfield-studio-v1";
 const icon = (name) =>
   `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
 const escape = (value) =>
@@ -50,35 +55,59 @@ let state = advanceJobs(load()),
   selectedId = null,
   reference = null,
   pending = false;
+const sessionContexts = new Map(),
+  references = new Map(),
+  validationScope = createValidationScope();
 try {
-  const draft = JSON.parse(localStorage.getItem(DRAFT));
-  if (draft) {
-    if (state.projects.some((p) => p.id === draft.projectId))
-      projectId = draft.projectId;
-    if (["forest", "golden", "noir"].includes(draft.preset))
-      preset = draft.preset;
-    if (draft.settings) {
-      quote(draft.settings);
-      settings = draft.settings;
-    }
-    if (typeof draft.prompt === "string")
-      $("#prompt").value = draft.prompt.slice(0, 2000);
-  }
+  projectId = activeProjectId(localStorage, state.projects);
 } catch {}
-function saveDraft() {
+restoreContext(projectId);
+function restoreContext(id) {
+  let context = sessionContexts.get(id);
   try {
-    localStorage.setItem(
-      DRAFT,
-      JSON.stringify({
-        projectId,
-        preset,
-        settings,
-        prompt: $("#prompt").value,
-      }),
-    );
+    context ||= readProjectContext(localStorage, id, state.jobs);
+  } catch {}
+  context ||= readProjectContext({ getItem: () => null }, id, state.jobs);
+  preset = context.preset;
+  settings = { ...context.settings };
+  selectedId = context.selectedId;
+  $("#prompt").value = context.prompt;
+  reference = references.get(id) || null;
+  renderReference();
+  $("#failure-toggle").checked = false;
+}
+function clearValidation() {
+  validationScope.invalidate();
+  const error = $("#generation-error");
+  if (!error.hidden && $("#toast").textContent === error.textContent)
+    $("#toast").hidden = true;
+  error.hidden = true;
+  error.textContent = "";
+}
+function saveDraft() {
+  clearValidation();
+  const context = {
+    preset,
+    settings: { ...settings },
+    selectedId,
+    prompt: $("#prompt").value,
+  };
+  sessionContexts.set(projectId, context);
+  references.set(projectId, reference);
+  try {
+    saveProjectContext(localStorage, projectId, context);
   } catch {
     storageWarning();
   }
+}
+function renderReference() {
+  $("#reference-input").value = "";
+  $("#reference-label").textContent = reference?.name || "Add reference";
+  $("#clear-reference").hidden = !reference;
+  $("#reference-preview").hidden = !reference;
+  $("#reference-preview").innerHTML = reference
+    ? `<img src="${reference.url}" alt="Your local reference"><span>${escape(reference.name)}<br>Local reference only · Sample content is unchanged</span>`
+    : "";
 }
 function storageWarning() {
   storageOK = false;
@@ -103,12 +132,15 @@ const updateRepository = createRepository({
   withLock: (fn) => (navigator.locks ? navigator.locks.request(KEY, fn) : fn()),
 });
 async function transact(fn) {
+  const errorProjectId = projectId,
+    errorScope = validationScope.capture();
   try {
     const next = await updateRepository(fn);
     render();
     return next;
   } catch (error) {
-    showError(error.message);
+    if (projectId === errorProjectId && validationScope.isCurrent(errorScope))
+      showError(error.message);
     throw error;
   }
 }
@@ -147,9 +179,10 @@ function mediaPath(config = settings, look = preset) {
   return `assets/${look}-${ratio}-${config.duration}.mp4`;
 }
 function switchProject(id) {
+  saveDraft();
   stopPreview();
   projectId = id;
-  selectedId = null;
+  restoreContext(id);
   view = "workspace";
   saveDraft();
   render();
@@ -237,6 +270,7 @@ function editProject() {
         next.projects.find((x) => x.id === p.id).name = name;
         return next;
       });
+      clearValidation();
       closeModal();
       toast("Project settings saved.");
     } catch (error) {
@@ -364,12 +398,14 @@ function render() {
       (el.onclick = () => {
         selectedId =
           el.dataset.version === "starter" ? null : el.dataset.version;
+        saveDraft();
         stopPreview();
         render();
       }),
   );
   $("#another-version").onclick = () => {
     selectedId = null;
+    saveDraft();
     stopPreview();
     render();
     $("#prompt").focus();
@@ -466,21 +502,19 @@ $("#use-example").onclick = () => {
 $("#generate-button").onclick = async () => {
   if (pending) return;
   pending = true;
-  $("#generation-error").hidden = true;
+  clearValidation();
   stopPreview();
   render();
   try {
-    const fail = $("#failure-toggle").checked;
-    await transact((s) =>
-      startJob(s, {
-        projectId: project().id,
-        prompt: $("#prompt").value,
-        preset,
-        settings: { ...settings },
-        outcome: fail ? "failure" : "success",
-        referenceName: reference?.name || null,
-      }),
-    );
+    const request = {
+      projectId: project().id,
+      prompt: $("#prompt").value,
+      preset,
+      settings: { ...settings },
+      outcome: $("#failure-toggle").checked ? "failure" : "success",
+      referenceName: reference?.name || null,
+    };
+    await transact((s) => startJob(s, request));
     $("#failure-toggle").checked = false;
     toast("Demo credits reserved. Your sample is in the queue.");
   } catch {
@@ -604,6 +638,7 @@ $("#reference-input").onchange = () => {
   }
   if (reference) URL.revokeObjectURL(reference.url);
   reference = { name: file.name, url: URL.createObjectURL(file) };
+  saveDraft();
   $("#reference-label").textContent = file.name;
   $("#clear-reference").hidden = false;
   $("#reference-preview").hidden = false;
@@ -613,6 +648,7 @@ $("#reference-input").onchange = () => {
 $("#clear-reference").onclick = () => {
   if (reference) URL.revokeObjectURL(reference.url);
   reference = null;
+  saveDraft();
   $("#reference-input").value = "";
   $("#reference-label").textContent = "Add reference";
   $("#clear-reference").hidden = true;
@@ -656,6 +692,7 @@ setInterval(() => {
         );
         if (finished) {
           selectedId = finished.id;
+          saveDraft();
           stopPreview();
           render();
           toast("Your sample film is ready. Take a look.");

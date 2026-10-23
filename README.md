@@ -3,14 +3,14 @@
 A product engineering assessment for 8x by Hamza Hameed.
 
 [Open the public studio](https://vela-creative-studio-hamza.candyrat6.chatgpt.site) ·
-[Implementation branch](https://github.com/devhamza246/8x-higgsfield-assignment/tree/codex/creative-studio)
+[Public source on main](https://github.com/devhamza246/8x-higgsfield-assignment)
 
 Public page, JavaScript and sample video verified without cookies or authentication.
 See [submission links and checklist](docs/submission.md).
 
-A focused creative workspace for exploring product films, with a clear answer to
-three questions: what will this attempt cost, what is my project limit, and what
-happens if it fails?
+Keep campaign briefs, settings and film explorations together, with an independent
+spending limit for each project and one shared demo-credit balance. Cost and
+failure recovery stay visible inside the creative workflow.
 
 ## Run locally
 
@@ -30,7 +30,8 @@ Open http://localhost:4173. ES modules require an HTTP server, not a file:// URL
   append-only reservation/return ledger.
 - Queued cancellation, processing, success, and an opt-in failure scenario with
   automatic, exactly-once demo-credit recovery.
-- Browser-local projects and generation history, refresh recovery, side-by-side
+- Independent browser-local briefs, settings and selected results for each project.
+  Generation history, refresh recovery, side-by-side
   version comparison, approval, issue reporting and matching MP4 downloads.
 - Local JPG/PNG/WebP reference previews (up to 5 MB); reference files never leave
   the browser. Preview files are session-only; project/job records persist.
@@ -69,6 +70,7 @@ its review statistics are research leads, not validated claims in this submissio
 
 - `studio/state.mjs`: pure, immutable economy and job transitions.
 - `studio/repository.mjs`: serialized storage transactions with shared-lock support.
+- `studio/context.mjs`: per-project drafts and result selection, including legacy-draft migration.
 - `studio/app.mjs`: browser interaction, persistence and rendering.
 - `studio/styles.css`: responsive design, keyboard focus and reduced-motion support.
 - `scripts/build_studio.py`: curated static build, excluding logs/research/credentials.
@@ -76,7 +78,7 @@ its review statistics are research leads, not validated claims in this submissio
 Node 22+ and Python 3:
 
 ```bash
-node --test --test-isolation=none tests/studio-state.test.mjs tests/studio-repository.test.mjs
+node --test --test-isolation=none tests/studio-state.test.mjs tests/studio-repository.test.mjs tests/studio-context.test.mjs
 python3 -m unittest discover -s tests -v
 python3 scripts/build_studio.py
 ```
@@ -97,3 +99,11 @@ remain in this GitHub repository; deployed assets contain only the application.
 responses. It is committed alongside work. Tool calls and intermediate reasoning
 are excluded. The current final response is included in the next commit after
 it arrives in the log. No association with or endorsement by Higgsfield is implied.
+
+## Repository status — 24 October 2026
+
+PR #1 was merged into `main` at `670fcbd`; the pre-review local and remote main
+were both `ec34389`. The implementation, earlier submission notes and capture logs
+are therefore present on main. The previous pending-push note described an earlier
+shell authentication failure and is no longer the repository's current state.
+This review follow-up is being developed on `codex/project-context-fixes`.

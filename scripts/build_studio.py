@@ -4,7 +4,7 @@ import shutil
 root=Path(__file__).resolve().parents[1]/'studio'
 output=root/'dist'
 output.mkdir(exist_ok=True)
-for name in ['index.html','styles.css','app.mjs','state.mjs','repository.mjs']:
+for name in ['index.html','styles.css','app.mjs','state.mjs','repository.mjs','context.mjs']:
  shutil.copy2(root/name,output/name)
 assets=output/'assets'
 assets.mkdir(exist_ok=True)
