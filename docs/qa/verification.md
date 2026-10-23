@@ -67,3 +67,9 @@ The GitHub public API reports `private: false` and `visibility: public`. Remote
 `codex/creative-studio` was already synchronized at `fc73ddb` before the current
 documentation update. The remote `main` remains the initial commit, so the submission
 notes use the implementation branch URL explicitly. No shared-branch merge was made.
+
+The follow-up documentation commit was created locally, but `git push` failed with
+“could not read Username for https://github.com” in the noninteractive shell.
+Public API checks independently confirmed the implementation and earlier capture
+logs are accessible on `codex/creative-studio`. Latest handoff notes need an
+authenticated push; do not confuse that with a missing product deployment.

@@ -47,7 +47,8 @@ Review the note in your own voice before submitting.
 
 - [x] Public deployment and sample media accessible without authentication.
 - [x] GitHub repository confirmed public.
-- [x] Implementation branch and automatic capture logs pushed to GitHub.
+- [x] Product implementation and earlier automatic capture logs are on GitHub.
+- [ ] Push the latest local submission-notes/capture-log follow-up: this shell has no GitHub credentials.
 - [x] Application tests, capture tests, desktop and mobile QA documented.
 - [x] Demo limitations disclosed in the app, README and walkthrough outline.
 - [ ] You have personally tried the public link and the main demo flow.
@@ -59,3 +60,10 @@ Review the note in your own voice before submitting.
 
 No application form has been submitted by the agent. Recording your camera,
 claiming personal experience and sending the assessment remain your steps.
+
+## Pending local push
+
+The implementation was already present on the public branch at `fc73ddb`. The
+follow-up push of these handoff notes failed because Git could not obtain a GitHub
+username in this noninteractive shell. Push `codex/creative-studio` from your
+authenticated Git client. No main-branch changes or credential changes were made.
