@@ -1,0 +1,12 @@
+[Unit]
+Description=8x assignment Codex prompt and final response capture
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /mnt/Data/Github/8x-higgsfield-assignment/scripts/agent_capture.py --repo /mnt/Data/Github/8x-higgsfield-assignment --author devhamza246
+WorkingDirectory=/mnt/Data/Github/8x-higgsfield-assignment
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
